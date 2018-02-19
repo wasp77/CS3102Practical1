@@ -3,7 +3,7 @@ import java.net.Socket;
 
 public class Client {
     private static final int PORT = 7777;
-    private static final String HOSTNAME = "localhost";
+    private static final String HOSTNAME = "pc2-030-l.cs.st-andrews.ac.uk";
     public static void main(String[] args) {
         try {
             String path = "/var/tmp/" + args[0];
