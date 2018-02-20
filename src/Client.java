@@ -77,6 +77,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        getSettings();
         try {
             logFile = new BufferedWriter(new FileWriter(InetAddress.getLocalHost().getHostName() + "-" + filename + ".txt"));
         } catch (UnknownHostException e) {
@@ -84,7 +85,6 @@ public class Client {
         } catch (IOException e) {
             System.out.println("Problems writing to the logfile");
         }
-        getSettings();
         for (int i = 0; i < testNum; i++) {
             getFile();
 //            if (i + 1 != testNum) {
