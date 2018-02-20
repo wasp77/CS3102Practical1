@@ -15,7 +15,7 @@ public class FileDistributor extends Thread{
             dos.writeBoolean(exists);
             dos.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error occurred while passing boolean to client");
         }
         return exists;
     }
@@ -34,31 +34,29 @@ public class FileDistributor extends Thread{
             dos.write(fileContents, 0, fileContents.length);
             dos.flush();
             dos.close();
-
-            System.out.println("file sent");
+            System.out.println(path + " sent to client " + Thread.currentThread().getId());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File was not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Problem with the file transfer");
         }
 
     }
 
     @Override
     public void run() {
-        System.out.println("thread: " + Thread.currentThread().getId());
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String path = in.readLine();
             OutputStream out = connection.getOutputStream();
             DataOutputStream dos = new DataOutputStream(out);
             if (checkFile(path, dos)) {
+                while (!Server.sendFile.get()) {}
                 sendFile(path, dos);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error encountered with the input and output streams");
         }
-        return;
     }
 
 }
