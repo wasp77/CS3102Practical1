@@ -26,14 +26,16 @@ public class Server {
             System.out.println("Server accepting connections on: " + InetAddress.getLocalHost());
             while (true) {
                 Socket clientConnect = server.accept();
+                if (sendFile.get()) {
+                    sendFile.set(false);
+                }
                 Thread handler = new FileDistributor(clientConnect);
                 handler.start();
                 connections += 1;
                 if (connections == connectionLimit) {
-                    System.out.println("connection limit reached sending files..");
+                    System.out.println("connection limit reached sending file..");
                     sendFile.set(true);
                     connections = 0;
-                    break;
                 }
             }
 

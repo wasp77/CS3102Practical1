@@ -34,7 +34,6 @@ public class FileDistributor extends Thread{
             dos.write(fileContents, 0, fileContents.length);
             dos.flush();
             dos.close();
-            System.out.println(path + " sent to client " + Thread.currentThread().getId());
         } catch (FileNotFoundException e) {
             System.out.println("File was not found");
         } catch (IOException e) {
