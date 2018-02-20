@@ -78,7 +78,7 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            logFile = new BufferedWriter(new FileWriter(InetAddress.getLocalHost().getHostName() + ".txt"));
+            logFile = new BufferedWriter(new FileWriter(InetAddress.getLocalHost().getHostName() + filename + ".txt"));
         } catch (UnknownHostException e) {
             System.out.println("couldn't get the host name");
         } catch (IOException e) {
