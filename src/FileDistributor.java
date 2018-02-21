@@ -23,16 +23,17 @@ public class FileDistributor extends Thread{
     private void sendFile(String path, DataOutputStream dos) {
         try {
             File testFile = new File(path);
-            byte[] fileContents = new byte[(int) testFile.length()];
             FileInputStream fis = new FileInputStream(testFile);
             BufferedInputStream bis = new BufferedInputStream(fis);
-
             DataInputStream dis = new DataInputStream(bis);
-            dis.readFully(fileContents, 0, fileContents.length);
+            byte[] fileContents = new byte[(int) (testFile.length()/2)];
+            dos.writeLong(testFile.length());
 
-            dos.writeLong(fileContents.length);
-            dos.write(fileContents, 0, fileContents.length);
-            dos.flush();
+            for (int i = 0; i < 2; i++) {
+                dis.readFully(fileContents, 0, fileContents.length);
+                dos.write(fileContents, 0, fileContents.length);
+                dos.flush();
+            }
             dos.close();
         } catch (FileNotFoundException e) {
             System.out.println("File was not found");
