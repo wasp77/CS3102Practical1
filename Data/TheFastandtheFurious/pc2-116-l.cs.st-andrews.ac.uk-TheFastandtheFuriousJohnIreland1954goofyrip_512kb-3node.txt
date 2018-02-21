@@ -1,0 +1,11 @@
+54288 ms
+39955 ms
+47377 ms
+46735 ms
+42806 ms
+51346 ms
+46779 ms
+45290 ms
+44555 ms
+43357 ms
+46248 ms (session average)
